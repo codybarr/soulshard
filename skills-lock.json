@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "skills": {
+    "godot-2d-movement": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-2d-movement/SKILL.md",
+      "computedHash": "bbdb8d1b55b1231437313e9c78067224d4bb28a0dd6abb3e8a2f6835061a49a8"
+    },
+    "godot-animation": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-animation/SKILL.md",
+      "computedHash": "15d2d5f1ba54aa29b1a9d44330aeda57c216df095260f0452de15cd2323e6674"
+    },
+    "godot-gdscript-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/game-development/skills/godot-gdscript-patterns/SKILL.md",
+      "computedHash": "da390e553f8533575a5f9b94c9a7a1aed5abf629a3f687f97c8c8d5b65bac873"
+    },
+    "godot-master": {
+      "source": "thedivergentai/gd-agentic-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot-master/SKILL.md",
+      "computedHash": "912690f1c0d7e1caa62b96ace461e36e6ddc8cedf3707e93bd67fb8cfb211a54"
+    },
+    "godot-physics": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-physics/SKILL.md",
+      "computedHash": "3ebd1d2155e4c9b260ae726da8ce7c6e0d114ad7aca9c526c812553a765bee54"
+    },
+    "godot-resources": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-resources/SKILL.md",
+      "computedHash": "c2f77d6dddafd013b8e2d79a50ac35e1210ce90d304980513a4835c662b92276"
+    },
+    "godot-tilemap": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-tilemap/SKILL.md",
+      "computedHash": "b8f8bc2ffdf11ee2b9281dbf99708ba691af8cdcd095482c9f253a78fef7ee42"
+    },
+    "godot-ui-control": {
+      "source": "gamedev-skills/awesome-gamedev-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/godot/godot-ui-control/SKILL.md",
+      "computedHash": "1fe9a2ddf7809220316dd1e7553723cc27c2f015ce8d06286cff75a5c95fd5cb"
+    }
+  }
+}

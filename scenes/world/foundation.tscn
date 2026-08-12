@@ -1,0 +1,142 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/foundation.gd" id="1_foundation"]
+[ext_resource type="PackedScene" path="res://scenes/ui/debug_overlay.tscn" id="2_debug"]
+
+[node name="Foundation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_foundation")
+
+[node name="TopBar" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 70.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 22
+
+[node name="Header" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+
+[node name="Brand" type="VBoxContainer" parent="TopBar/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="TopBar/Header/Brand"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.965, 0.839, 0.427, 1)
+theme_override_font_sizes/font_size = 22
+text = "SOULSHARD"
+
+[node name="Subtitle" type="Label" parent="TopBar/Header/Brand"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.506, 0.839, 0.667, 1)
+theme_override_font_sizes/font_size = 9
+text = "TOP-DOWN ACTION RPG  /  FOUNDATION BUILD 01"
+
+[node name="StatusLabel" type="Label" parent="TopBar/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "●  FOUNDATION ONLINE"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="CenterShell" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 132.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FoundationPanel" type="PanelContainer" parent="CenterShell"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="CenterShell/FoundationPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Eyebrow" type="Label" parent="CenterShell/FoundationPanel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.965, 0.839, 0.427, 1)
+theme_override_font_sizes/font_size = 9
+text = "PHASE I  //  SYSTEM CHECK"
+
+[node name="Headline" type="Label" parent="CenterShell/FoundationPanel/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "The foundation is alive."
+
+[node name="Rule" type="HSeparator" parent="CenterShell/FoundationPanel/Content"]
+layout_mode = 2
+
+[node name="Summary" type="Label" parent="CenterShell/FoundationPanel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.655, 0.718, 0.655, 1)
+theme_override_font_sizes/font_size = 10
+text = "640 × 360 integer-scaled canvas  •  typed autoloads  •  versioned local JSON\nKeyboard, mouse, and controller actions are mapped for the combat slice."
+
+[node name="Actions" type="HBoxContainer" parent="CenterShell/FoundationPanel/Content"]
+layout_mode = 2
+alignment = 1
+
+[node name="SaveButton" type="Button" parent="CenterShell/FoundationPanel/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "SAVE  [F5]"
+
+[node name="LoadButton" type="Button" parent="CenterShell/FoundationPanel/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "LOAD  [F9]"
+
+[node name="ResetButton" type="Button" parent="CenterShell/FoundationPanel/Content/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "RESET SESSION"
+
+[node name="Footer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_right = 22
+
+[node name="FooterRow" type="HBoxContainer" parent="Footer"]
+layout_mode = 2
+
+[node name="Controls" type="Label" parent="Footer/FooterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.392, 0.51, 0.463, 1)
+theme_override_font_sizes/font_size = 9
+text = "MOVE  WASD / LEFT STICK    •    ATTACK  J / X    •    DODGE  SPACE / A"
+
+[node name="DebugHint" type="Label" parent="Footer/FooterRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.392, 0.51, 0.463, 1)
+theme_override_font_sizes/font_size = 9
+text = "F3  DEBUG"
+
+[node name="DebugOverlay" parent="." instance=ExtResource("2_debug")]

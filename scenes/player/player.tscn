@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scenes/player/weapon_placeholder.gd" id="2_weapon"]
+[ext_resource type="Resource" path="res://data/combat/starter_combo_1.tres" id="3_combo_1"]
+[ext_resource type="Resource" path="res://data/combat/starter_combo_2.tres" id="4_combo_2"]
+[ext_resource type="Resource" path="res://data/combat/starter_combo_3.tres" id="5_combo_3"]
+[ext_resource type="Script" path="res://scripts/combat/player_hitbox.gd" id="6_hitbox"]
+[ext_resource type="Resource" path="res://data/spells/fireball.tres" id="7_fireball_data"]
+[ext_resource type="PackedScene" path="res://scenes/effects/fireball.tscn" id="8_fireball_scene"]
+[ext_resource type="Script" path="res://scripts/combat/targeting_controller.gd" id="9_targeting"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
+radius = 8.0
+height = 22.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(28, 22)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("1_player")
+combo_attacks = Array[ExtResource("3_combo_1")]([ExtResource("3_combo_1"), ExtResource("4_combo_2"), ExtResource("5_combo_3")])
+fireball_data = ExtResource("7_fireball_data")
+fireball_scene = ExtResource("8_fireball_scene")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_player")
+
+[node name="WeaponAnchorUp" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-8, -8)
+
+[node name="WeaponAnchorDown" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(10, 7)
+
+[node name="WeaponAnchorLeft" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-11, 2)
+
+[node name="WeaponAnchorRight" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(11, 2)
+
+[node name="WeaponVisual" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_weapon")
+
+[node name="TargetingController" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("9_targeting")
+target_range = 360.0
+
+[node name="AttackHitbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 16
+monitoring = true
+monitorable = false
+script = ExtResource("6_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("RectangleShape2D_hitbox")
+disabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+limit_left = -128
+limit_top = -128
+limit_right = 1664
+limit_bottom = 1088

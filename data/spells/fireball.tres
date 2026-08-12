@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FireballData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://data/spells/fireball_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"fireball"
+display_name = "Fireball"
+damage = 18
+target_range = 360.0
+projectile_speed = 420.0
+homing_turn_rate = 9.0
+max_travel_distance = 520.0
+knockback_force = 220.0
+hit_stop_seconds = 0.04

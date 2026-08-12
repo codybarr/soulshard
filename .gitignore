@@ -1,0 +1,12 @@
+# Godot editor cache and generated exports
+.godot/
+builds/
+*.tmp
+
+# Local OS/editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Local agent/browser artifacts
+.playwright-cli/

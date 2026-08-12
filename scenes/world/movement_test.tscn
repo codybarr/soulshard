@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/movement_test.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/debug_overlay.tscn" id="3_debug"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/training_dummy.tscn" id="4_dummy"]
+
+[sub_resource type="RectangleShape2D" id="WallHorizontal"]
+size = Vector2(1536, 32)
+
+[sub_resource type="RectangleShape2D" id="WallVertical"]
+size = Vector2(32, 896)
+
+[sub_resource type="RectangleShape2D" id="RuinOne"]
+size = Vector2(170, 74)
+
+[sub_resource type="RectangleShape2D" id="RuinTwo"]
+size = Vector2(218, 92)
+
+[sub_resource type="RectangleShape2D" id="RuinThree"]
+size = Vector2(100, 46)
+
+[node name="MovementTest" type="Node2D"]
+script = ExtResource("1_world")
+
+[node name="Bounds" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 2
+
+[node name="North" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(768, 16)
+shape = SubResource("WallHorizontal")
+
+[node name="South" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(768, 880)
+shape = SubResource("WallHorizontal")
+
+[node name="West" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(16, 448)
+shape = SubResource("WallVertical")
+
+[node name="East" type="CollisionShape2D" parent="Bounds"]
+position = Vector2(1520, 448)
+shape = SubResource("WallVertical")
+
+[node name="Ruins" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 2
+
+[node name="RuinOne" type="CollisionShape2D" parent="Ruins"]
+position = Vector2(272, 228)
+shape = SubResource("RuinOne")
+
+[node name="RuinTwo" type="CollisionShape2D" parent="Ruins"]
+position = Vector2(1110, 596)
+shape = SubResource("RuinTwo")
+
+[node name="RuinThree" type="CollisionShape2D" parent="Ruins"]
+position = Vector2(704, 374)
+shape = SubResource("RuinThree")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(640, 560)
+
+[node name="TrainingDummyOne" parent="." instance=ExtResource("4_dummy")]
+position = Vector2(844, 538)
+
+[node name="TrainingDummyTwo" parent="." instance=ExtResource("4_dummy")]
+position = Vector2(930, 650)
+
+[node name="TrainingDummyThree" parent="." instance=ExtResource("4_dummy")]
+position = Vector2(1210, 322)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Margin" type="MarginContainer" parent="HUD"]
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 310.0
+offset_bottom = 85.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Panel" type="PanelContainer" parent="HUD/Margin"]
+layout_mode = 2
+
+[node name="Copy" type="VBoxContainer" parent="HUD/Margin/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Title" type="Label" parent="HUD/Margin/Panel/Copy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.965, 0.839, 0.427, 1)
+theme_override_font_sizes/font_size = 15
+text = "MOVEMENT PROVING GROUND"
+
+[node name="Instructions" type="Label" parent="HUD/Margin/Panel/Copy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.655, 0.718, 0.655, 1)
+theme_override_font_sizes/font_size = 10
+text = "Move: WASD / arrows / left stick   •   Attack: J / left mouse\nFireball: H (requires a gold target ring)   •   Target cycle: U / I"
+
+[node name="Footer" type="Label" parent="HUD"]
+offset_left = 18.0
+offset_top = 332.0
+offset_right = 550.0
+offset_bottom = 352.0
+theme_override_colors/font_color = Color(0.392, 0.51, 0.463, 1)
+theme_override_font_sizes/font_size = 9
+text = "F3 DEBUG   •   Placeholder art and state hooks are ready for the combat slice."
+
+[node name="DebugOverlay" parent="." instance=ExtResource("3_debug")]
