@@ -19,7 +19,7 @@ Build in order. Every completed stage must remain playable, save cleanly, and av
 - [ ] **3. Establish data-driven combat**
   - [x] Create authored definitions for the starter sword combo timings, damage, knockback, and hit-stop.
   - [x] Implement a light-attack three-hit combo, damage, knockback, and hit-stop.
-  - [ ] Implement charged/heavy attack, dodge invulnerability, and one spell.
+  - [ ] Implement charged/heavy attack and dodge invulnerability; one spell is complete.
   - [x] Use `Area2D` hitboxes/hurtboxes activated only during authored attack windows; do not use distance-only hits.
   - [x] Keep the player action flow explicitly gated between movement and attack states; add enemy action states with the enemy slice.
   - [ ] Add combat debug controls for hitboxes, active action, damage events, and time scale.

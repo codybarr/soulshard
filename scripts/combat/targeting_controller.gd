@@ -58,7 +58,11 @@ func _targets_in_range() -> Array[Node2D]:
 
 
 func _is_valid_target(candidate: Node2D) -> bool:
-	return is_instance_valid(candidate) and candidate.is_in_group(&"targetable") and owner_body.global_position.distance_to(candidate.global_position) <= target_range
+	if not is_instance_valid(candidate) or not candidate.is_in_group(&"targetable"):
+		return false
+	if candidate.has_method(&"is_targetable") and not candidate.call(&"is_targetable"):
+		return false
+	return owner_body.global_position.distance_to(candidate.global_position) <= target_range
 
 
 func _set_target(next_target: Node2D) -> void:

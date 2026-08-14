@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
 [ext_resource type="Script" path="res://scenes/player/weapon_placeholder.gd" id="2_weapon"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" path="res://data/spells/fireball.tres" id="7_fireball_data"]
 [ext_resource type="PackedScene" path="res://scenes/effects/fireball.tscn" id="8_fireball_scene"]
 [ext_resource type="Script" path="res://scripts/combat/targeting_controller.gd" id="9_targeting"]
+[ext_resource type="Script" path="res://scripts/combat/hurtbox.gd" id="10_hurtbox"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
 radius = 8.0
@@ -17,7 +18,7 @@ height = 22.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
 size = Vector2(28, 22)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 1
 script = ExtResource("1_player")
@@ -52,6 +53,17 @@ script = ExtResource("2_weapon")
 unique_name_in_owner = true
 script = ExtResource("9_targeting")
 target_range = 360.0
+
+[node name="Hurtbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 16
+monitorable = true
+script = ExtResource("10_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_player")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
 unique_name_in_owner = true

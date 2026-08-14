@@ -28,13 +28,23 @@ func launch(target: Node2D, source: Node2D, direction: Vector2) -> void:
 func _physics_process(delta: float) -> void:
 	if _spent or data == null:
 		return
-	if is_instance_valid(_target):
-		var desired_direction := global_position.direction_to(_target.global_position)
-		_direction = _direction.slerp(desired_direction, minf(1.0, data.homing_turn_rate * delta)).normalized()
+	if not _is_live_target():
+		queue_free()
+		return
+	var desired_direction := global_position.direction_to(_target.global_position)
+	_direction = _direction.slerp(desired_direction, minf(1.0, data.homing_turn_rate * delta)).normalized()
 	rotation = _direction.angle()
 	global_position += _direction * data.projectile_speed * delta
 	if global_position.distance_to(_origin) >= data.max_travel_distance:
 		queue_free()
+
+
+func _is_live_target() -> bool:
+	if not is_instance_valid(_target):
+		return false
+	if _target.has_method(&"is_targetable"):
+		return _target.call(&"is_targetable")
+	return true
 
 
 func _on_area_entered(area: Area2D) -> void:

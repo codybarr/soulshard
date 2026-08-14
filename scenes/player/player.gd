@@ -4,6 +4,8 @@ extends CharacterBody2D
 signal facing_changed(direction: Vector2)
 signal presentation_state_changed(state: StringName)
 signal attack_landed(attack: AttackData, damage: DamageData, target: Node2D)
+signal health_changed(current_health: int, maximum_health: int)
+signal died
 
 const PRESENTATION_IDLE: StringName = &"idle"
 const PRESENTATION_MOVE: StringName = &"move"
@@ -18,6 +20,7 @@ const PRESENTATION_DEAD: StringName = &"dead"
 @export var combo_attacks: Array[AttackData] = []
 @export var fireball_data: FireballData
 @export var fireball_scene: PackedScene
+@export_range(1, 999, 1) var max_health: int = 100
 
 @onready var weapon_visual: Node2D = %WeaponVisual
 @onready var weapon_anchor_up: Marker2D = %WeaponAnchorUp
@@ -26,6 +29,7 @@ const PRESENTATION_DEAD: StringName = &"dead"
 @onready var weapon_anchor_right: Marker2D = %WeaponAnchorRight
 @onready var attack_hitbox: PlayerHitbox = %AttackHitbox
 @onready var targeting: TargetingController = %TargetingController
+@onready var hurtbox: Hurtbox = %Hurtbox
 
 var facing: Vector2 = Vector2.DOWN
 var presentation_state: StringName = PRESENTATION_IDLE
@@ -36,11 +40,14 @@ var _attack_hitbox_active: bool = false
 var _attack_direction: Vector2 = Vector2.DOWN
 var _combo_queued: bool = false
 var _hit_stop_active: bool = false
+var health: int = 100
 
 
 func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	attack_hitbox.landed.connect(_on_attack_landed)
+	hurtbox.hit_received.connect(_on_hit_received)
+	health = max_health
 	_update_weapon_pose()
 	queue_redraw()
 
@@ -158,6 +165,18 @@ func _play_sword_swing(index: int) -> void:
 	tween.tween_property(weapon_visual, "rotation", end_rotation, combo_attacks[index].windup_seconds + combo_attacks[index].active_seconds)
 
 
+func take_damage(damage: DamageData) -> void:
+	if presentation_state == PRESENTATION_DEAD:
+		return
+	health = maxi(0, health - damage.amount)
+	health_changed.emit(health, max_health)
+	if health == 0:
+		play_death()
+		died.emit()
+		return
+	play_hurt()
+
+
 func play_hurt() -> void:
 	_finish_attack()
 	_set_presentation_state(PRESENTATION_HURT)
@@ -186,6 +205,10 @@ func _update_weapon_pose() -> void:
 	weapon_visual.position = anchor.position
 	weapon_visual.rotation = facing.angle()
 	weapon_visual.z_index = 1
+
+
+func _on_hit_received(_damage: DamageData) -> void:
+	pass
 
 
 func _on_attack_landed(damage: DamageData, target: Node2D) -> void:
